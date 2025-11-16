@@ -14,8 +14,8 @@ builder.Services.AddDbContext<AppDbContext>(optionsAction =>
 builder.Services.AddControllersWithTransformer();
 builder.Services.AddCorsPolicy(environment);
 
-builder.Services.AddOpenApi();
 builder.Services.AddControllers();
+builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo { Title = "Uanitteiru Tools", Version = "v1" });
@@ -26,18 +26,19 @@ builder.Services.AddUanitteiruToolsServices(environment);
 
 var app = builder.Build();
 
-app.MapOpenApi();
-
 app.UseHttpsRedirection();
-
 app.MapControllers();
-app.UseSwagger();
-app.UseSwaggerUI(options =>
-{
-    options.SwaggerEndpoint("v1/swagger.json", "API V1");
-});
 
-Console.WriteLine("IsDevelopment: " + app.Environment.IsDevelopment());
+
+if (app.Environment.IsDevelopment())
+{
+    app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("v1/swagger.json", "API V1");
+    });
+}
 
 if (!app.Environment.IsDevelopment())
 {

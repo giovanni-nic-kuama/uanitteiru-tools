@@ -7,7 +7,7 @@ on:
         required: true
         default: '0.0.0'
         
-run-name: ${{ format('UanitteruTools, V{0}, ref:{1} ', github.event.inputs.version_input, github.ref_name) }}
+run-name: ${{ format('UanitteruTools, tag:{0}, ref:{1} ', github.event.inputs.version_input, github.ref_name) }}
 
 jobs:
   ssh-deploy:
