@@ -1,0 +1,16 @@
+@UanitteiruTools_HostAddress = http://localhost:5098/api
+@UanitteiruTools_DockerHostAddress = http://localhost:8080/api
+@UanitteiruTools_VPS_HostAddress = https://shop.vps.doof.app/api
+
+### POST temperature
+POST {{UanitteiruTools_HostAddress}}/sensor-measurements
+X-Client-Secret: -DAq)m3MJ9q;VJ`ho${smN1|1:in@`y+_5t26o3G
+Content-Type: application/json\
+
+{
+  "temperature": 123.0,
+  "humidity": 124.11,
+  "heathIndex": 12
+}
+
+###

@@ -1,0 +1,17 @@
+﻿name: uanitteiru-tools-dev
+services:
+  postgres-db:
+    image: postgres:16.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_DB=uanitteiru-tools-local
+      - POSTGRES_USER=uanitteiru-tools
+      - POSTGRES_PASSWORD=password
+    ports:
+      - '5442:5432'
+    volumes:
+      - uanitteiru-tools-volume:/var/lib/postgresql/data
+
+volumes:
+  uanitteiru-tools-volume:
+    driver: local

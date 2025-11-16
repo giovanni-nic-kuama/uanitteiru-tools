@@ -1,0 +1,44 @@
+name: Production Deploy
+on:
+  workflow_dispatch:
+    inputs:
+      version_input:
+        description: 'Number, eg: 0.1.2'
+        required: true
+        default: '0.0.0'
+        
+run-name: ${{ format('UanitteruTools, V{0}, ref:{1} ', github.event.inputs.version_input, github.ref_name) }}
+
+jobs:
+  ssh-deploy:
+    name: Build & Push to DockerHub and SSH pull it
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build and export docker image to tar archive
+        run: |
+          docker build --no-cache -t uanitteiru/uanittiru-tools:${{ github.event.inputs.version_input }} -f UanitteiruTools/Dockerfile .
+          docker save -o uanittiru-tools.tar uanitteiru/uanittiru-tools:${{ github.event.inputs.version_input }}
+          chmod 664 uanittiru-tools.tar
+
+      - name: Upload docker image to prod server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.PROD_SERVER_IP }}
+          username: ${{ secrets.PROD_SERVER_USER }}
+          key: ${{ secrets.PROD_SERVER_KEY }}
+          source: "uanittiru-tools.tar"
+          target: "/root/uanitteiru"
+
+      - name: SSH - Load image into Docker and run docker compose
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.PROD_SERVER_IP  }}
+          username: ${{ secrets.PROD_SERVER_USER  }}
+          key: ${{ secrets.PROD_SERVER_KEY }}
+          script_stop: true
+          script: |
+            cd /root/uanitteiru
+            echo "✨ Load docker image to docker"
+            docker load -i uanittiru-tools.tar

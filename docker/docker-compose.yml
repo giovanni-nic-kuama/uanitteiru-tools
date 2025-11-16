@@ -1,0 +1,6 @@
+﻿services:
+  uanitteirutools:
+    image: uanittiru-tools:0.0.0
+    restart: always
+    ports:
+      - "8080:8080"
