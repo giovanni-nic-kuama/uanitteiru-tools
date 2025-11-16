@@ -9,6 +9,6 @@ public class SensorMeasurementCreateDtoValidator : AbstractValidator<SensorMeasu
     {
         RuleFor(e => e.Temperature).NotEmpty();
         RuleFor(e => e.Humidity).NotEmpty();
-        RuleFor(e => e.HeathIndex).NotEmpty();
+        RuleFor(e => e.HeatIndex).NotEmpty();
     }
 }

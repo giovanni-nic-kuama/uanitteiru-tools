@@ -11,7 +11,7 @@ public static class SensorMeasurementMappings
         {
             Temperature = dto.Temperature!.Value,
             Humidity = dto.Humidity!.Value,
-            HeathIndex = dto.HeathIndex!.Value,
+            HeatIndex = dto.HeatIndex!.Value,
             CreatedAt = DateTime.UtcNow
         };
     }

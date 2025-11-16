@@ -10,7 +10,7 @@ public class SensorMeasurement : BaseEntity
     [Precision(5, 2)]
     public decimal Humidity { get; set; }
     [Precision(5, 2)]
-    public decimal HeathIndex { get; set; }
+    public decimal HeatIndex { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime? DeletedAt { get; set; }
 }

@@ -4,5 +4,5 @@ public class SensorMeasurementCreateDto
 {
     public decimal? Temperature { get; set; }
     public decimal? Humidity { get; set; }
-    public decimal? HeathIndex { get; set; }
+    public decimal? HeatIndex { get; set; }
 }
