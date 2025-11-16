@@ -37,4 +37,11 @@ app.UseSwaggerUI(options =>
     options.SwaggerEndpoint("v1/swagger.json", "API V1");
 });
 
+if (!app.Environment.IsDevelopment())
+{
+    using var scope = app.Services.CreateScope();
+    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    await dbContext.Database.MigrateAsync();
+}
+
 app.Run();
