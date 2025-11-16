@@ -37,6 +37,8 @@ app.UseSwaggerUI(options =>
     options.SwaggerEndpoint("v1/swagger.json", "API V1");
 });
 
+Console.WriteLine("IsDevelopment: " + app.Environment.IsDevelopment());
+
 if (!app.Environment.IsDevelopment())
 {
     using var scope = app.Services.CreateScope();

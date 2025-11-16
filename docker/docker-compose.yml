@@ -2,5 +2,7 @@
   uanitteirutools:
     image: uanittiru-tools:0.0.0
     restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
     ports:
       - "8080:8080"

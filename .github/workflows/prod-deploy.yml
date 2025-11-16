@@ -42,3 +42,5 @@ jobs:
             cd /root/uanitteiru
             echo "✨ Load docker image to docker"
             docker load -i uanittiru-tools.tar
+            APP_VERSION="${{ github.event.inputs.version_input }}" docker compose up -d
+            echo "🚀 All done 🚀"
